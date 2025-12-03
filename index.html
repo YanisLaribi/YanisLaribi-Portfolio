@@ -27,6 +27,9 @@
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
+    <!-- Spline Viewer -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
+
     <style>
         :root {
             --neon-cyan: #00f3ff;
@@ -337,30 +340,51 @@
 
         <!-- Hero Section -->
         <section id="hero" class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
-            <div class="max-w-6xl w-full z-10 text-center md:text-left">
-                <p class="font-mono text-cyan mb-4 text-lg tracking-widest hero-anim">HELLO WORLD, I AM</p>
-                <h1 class="font-display font-black text-7xl md:text-9xl mb-2 tracking-tighter hero-anim">
-                    YANIS <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-cyan via-purple to-pink">LARIBI</span>
-                </h1>
-                <h2 class="font-display font-bold text-4xl md:text-6xl text-gray-400 mb-8 hero-anim">
-                    BUILDING THE <span id="typed-text" class="text-white"></span>
-                </h2>
-                <p class="max-w-2xl text-xl text-gray-400 mb-12 leading-relaxed hero-anim">
-                    A creative software engineer merging <span class="text-cyan">code</span>, <span
-                        class="text-purple">design</span>, and <span class="text-pink">innovation</span>. I craft
-                    digital experiences that defy gravity.
-                </p>
-                <div class="flex flex-col md:flex-row gap-6 hero-anim">
-                    <a href="#projects" class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-lg z-20">
-                        <div
-                            class="absolute inset-0 w-full h-full bg-gradient-to-r from-cyan to-purple opacity-20 group-hover:opacity-40 transition-opacity">
-                        </div>
-                        <div class="absolute inset-0 w-full h-full border border-cyan rounded-lg"></div>
-                        <span
-                            class="relative font-bold text-cyan tracking-widest group-hover:text-white transition-colors">VIEW
-                            PROJECTS</span>
-                    </a>
+            <div class="max-w-7xl w-full z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <p class="font-mono text-cyan mb-4 text-lg tracking-widest hero-anim">HELLO WORLD, I AM</p>
+                    <h1 class="font-display font-black text-7xl md:text-9xl mb-2 tracking-tighter hero-anim">
+                        YANIS <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan via-purple to-pink">LARIBI</span>
+                    </h1>
+                    <h2 class="font-display font-bold text-4xl md:text-6xl text-gray-400 mb-8 hero-anim">
+                        BUILDING THE <span id="typed-text" class="text-white"></span>
+                    </h2>
+                    <p class="max-w-2xl text-xl text-gray-400 mb-12 leading-relaxed hero-anim">
+                        A creative software engineer merging <span class="text-cyan">code</span>, <span
+                            class="text-purple">design</span>, and <span class="text-pink">innovation</span>. I craft
+                        digital experiences that defy gravity.
+                    </p>
+                    <div class="flex flex-col md:flex-row gap-6 hero-anim">
+                        <a href="#projects"
+                            class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-lg z-20">
+                            <div
+                                class="absolute inset-0 w-full h-full bg-gradient-to-r from-cyan to-purple opacity-20 group-hover:opacity-40 transition-opacity">
+                            </div>
+                            <div class="absolute inset-0 w-full h-full border border-cyan rounded-lg"></div>
+                            <span
+                                class="relative font-bold text-cyan tracking-widest group-hover:text-white transition-colors">VIEW
+                                PROJECTS</span>
+                        </a>
+                        <a href="projects.html" target="_blank"
+                            class="group relative px-8 py-4 bg-transparent overflow-hidden rounded-lg z-20">
+                            <div
+                                class="absolute inset-0 w-full h-full bg-gradient-to-r from-purple to-pink opacity-20 group-hover:opacity-40 transition-opacity">
+                            </div>
+                            <div class="absolute inset-0 w-full h-full border border-purple rounded-lg"></div>
+                            <span
+                                class="relative font-bold text-purple tracking-widest group-hover:text-white transition-colors">SHOW
+                                ALL PROJECTS</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Spline Robot -->
+                <div class="h-[500px] w-full hidden md:block relative hero-anim overflow-hidden">
+                    <spline-viewer url="https://prod.spline.design/v0dVTzsRHO1D2lv7/scene.splinecode"
+                        class="h-[calc(100%+60px)] w-full"></spline-viewer>
+
+
                 </div>
             </div>
 
@@ -783,186 +807,29 @@
 
             tl.to(".loader-text", {
                 opacity: 1,
-                duration: 0.5,
-                y: -20,
-                ease: "power3.out"
+                duration: 1
             })
                 .to(".loader-bar", {
                     width: "100%",
                     duration: 1.5,
                     ease: "power2.inOut"
                 })
-                .to(".loader-text", {
+                .to(".loader-content", {
                     opacity: 0,
                     y: -50,
                     duration: 0.5,
                     delay: 0.2
                 })
-                .to(".loader-bar", {
-                    height: 0,
-                    opacity: 0,
-                    duration: 0.3
-                }, "-=0.3")
                 .to("#preloader", {
                     yPercent: -100,
                     duration: 1,
                     ease: "power4.inOut"
                 })
                 .add(() => {
-                    heroTl.play(); // Start hero animation after preloader
+                    heroTl.play();
                 }, "-=0.5");
         });
 
-        // --- Smooth Scrolling (Lenis) ---
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
-
-        // Connect Lenis to ScrollTrigger
-        lenis.on('scroll', ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
-
-        gsap.ticker.lagSmoothing(0);
-
-        // --- Enhanced Scroll Animations ---
-
-        // Sections Reveal
-        const sections = document.querySelectorAll('section:not(#hero)');
-        sections.forEach(section => {
-            gsap.from(section.children, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 80%",
-                    end: "top 20%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power3.out"
-            });
-        });
-
-        // --- Canvas Background (More Active) ---
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 1.5; // Faster speed
-                this.vy = (Math.random() - 0.5) * 1.5;
-                this.size = Math.random() * 2;
-                this.color = Math.random() > 0.5 ? '#00f3ff' : '#bd00ff'; // Cyan or Purple
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 60; i++) {
-                particles.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
-            // Draw connections
-            particles.forEach((a, index) => {
-                particles.slice(index + 1).forEach(b => {
-                    const dx = a.x - b.x;
-                    const dy = a.y - b.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 150) {
-                        ctx.strokeStyle = `rgba(100, 100, 255, ${0.1 * (1 - distance / 150)})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(a.x, a.y);
-                        ctx.lineTo(b.x, b.y);
-                        ctx.stroke();
-                    }
-                });
-            });
-
-            requestAnimationFrame(animateCanvas);
-        }
-        animateCanvas();
-
-        // --- Mobile Menu ---
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
-
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('translate-x-full');
-                menuBtn.querySelector('span').textContent = 'close';
-                document.body.style.overflow = 'hidden';
-            } else {
-                mobileMenu.classList.add('translate-x-full');
-                menuBtn.querySelector('span').textContent = 'menu';
-                document.body.style.overflow = 'auto';
-            }
-        }
-        menuBtn.addEventListener('click', toggleMenu);
-
-        // --- Vanilla Tilt Init ---
-        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2,
-        });
     </script>
 </body>
 
