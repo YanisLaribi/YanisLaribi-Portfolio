@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Projects Highlight - Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#66ffdb",
+            "background-light": "#f5f8f8",
+            "background-dark": "#0a192f",
+            "text-primary-dark": "#ccd6f6",
+            "text-secondary-dark": "#8892b0",
+          },
+          fontFamily: {
+            "display": ["Space Grotesk", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #0a192f;
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+    .glassmorphism-card {
+      background: rgba(10, 25, 47, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(102, 255, 219, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+    .glassmorphism-card:hover {
+      border-color: rgba(102, 255, 219, 0.5);
+      box-shadow: 0 0 20px rgba(102, 255, 219, 0.1);
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-primary-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 sm:px-10 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-4 sm:px-10 py-5">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_535)">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_535">
+<rect fill="white" height="48" width="48"></rect>
+</clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em]">Yanis Laribi</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-text-secondary-dark hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">About</a>
+<a class="text-text-secondary-dark hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Experience</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Projects</a>
+<a class="text-text-secondary-dark hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Contact</a>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-background-dark text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-opacity">
+<span class="truncate">Resume</span>
+</button>
+</div>
+</header>
+<main class="flex-1 py-16 px-4">
+<div class="flex items-center gap-4 mb-12">
+<h2 class="text-text-primary-dark text-3xl font-bold leading-tight tracking-tight">Projects I've Built</h2>
+<div class="h-px flex-1 bg-primary/20"></div>
+</div>
+<div class="grid grid-cols-1 gap-8">
+<div class="glassmorphism-card rounded-lg p-6 @container">
+<div class="flex flex-col items-stretch justify-start gap-4 @xl:flex-row @xl:items-start @xl:gap-6">
+<div class="w-full @xl:w-1/3 flex-shrink-0 bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Abstract gradient representing the NutriTrack project" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjWWwOrusz83kk3qPMziwiYFDd7_fkZGBRg9z12QPCKQg8Olk5Q--skuHM6Q8nSoLkjr48BDhBXz8PVkDxwpo_qhbb0B3wcXFGwASGDCHbCua7GexoK5iXGDgnMhP_yfv5BJfzFU9h814dpr6h7oBg4KNh8uv1e85sEcBux7Dm-y-it_3focWGopLX2cXtsdA50913q_9Hw4x8p2UD5h3t673QiS8oZxY39j9LrR0Um5JLMgE118piagjgOEDB9q3eEKVdzEAyj1U");'></div>
+<div class="flex w-full flex-col items-stretch justify-center gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-primary text-sm font-normal leading-normal">React | Node.js | Firebase</p>
+<p class="text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em] mt-1">NutriTrack</p>
+</div>
+<p class="text-text-secondary-dark text-sm font-normal leading-normal flex-shrink-0">Hackathon - 2025</p>
+</div>
+<p class="text-text-secondary-dark text-base font-normal leading-relaxed">
+                      A comprehensive nutrition tracking application developed for a hackathon, featuring real-time data analysis and a user-friendly interface.
+                    </p>
+<div class="flex items-center gap-4 mt-2">
+<a class="text-text-secondary-dark hover:text-primary transition-colors" data-alt="GitHub icon link" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+</a>
+<a class="text-text-secondary-dark hover:text-primary transition-colors" data-alt="YouTube icon link" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 11.75a29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="glassmorphism-card rounded-lg p-6 @container">
+<div class="flex flex-col items-stretch justify-start gap-4 @xl:flex-row @xl:items-start @xl:gap-6">
+<div class="w-full @xl:w-1/3 flex-shrink-0 bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Abstract gradient representing the Quixo project" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCiv_DFu4VEOtTLAwm0seYNpqy6AezhM6HM9xnp-ZZDFpE-gQ8ShGh_qBnN1K7Qdyd9pEhKKfnIyqy5kuSzujtEtBGuMaIMnFucUJKJpgZKWlZcULqTvLsbNkcCa2grDMjX_s1OgHwX5tnCblWt3tNpXaywAymK1wsN1OcUYXoGz7Mhh9ONf_BRD5z1VKInH8Svh9lPJ_1df7ARaNQMfpj9ntZMqS1QNesQox4ZwZSa1W_HhUtp4sWXUp_TXA7YN26DMy5Z5ixU3lU");'></div>
+<div class="flex w-full flex-col items-stretch justify-center gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-primary text-sm font-normal leading-normal">Python</p>
+<p class="text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em] mt-1">Quixo</p>
+</div>
+<p class="text-text-secondary-dark text-sm font-normal leading-normal flex-shrink-0">Python Game - 2024</p>
+</div>
+<p class="text-text-secondary-dark text-base font-normal leading-relaxed">
+                      An implementation of the strategic board game Quixo, built with Python, focusing on game logic, AI opponents, and a clean console-based UI.
+                    </p>
+<div class="flex items-center gap-4 mt-2">
+<a class="text-text-secondary-dark hover:text-primary transition-colors" data-alt="GitHub icon link" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="glassmorphism-card rounded-lg p-6 @container">
+<div class="flex flex-col items-stretch justify-start gap-4 @xl:flex-row @xl:items-start @xl:gap-6">
+<div class="w-full @xl:w-1/3 flex-shrink-0 bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Abstract gradient representing the Bank Management project" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjBYFS6c7iI_yPLdA1M7lGUTPRS6m3eNeq1lKUGv6PaDADLQGxsm810rm_rBKpdFeyARnWPndfTHCZxka3cN_XdT5UH1yh299hXujyZS9nhVd5Dg8OO5F0vXZ7kyS4khT2BltjP_tm1IeSccsjHBi0ayAsEbsk_WlIx_ngvVe09hNT13oTNy5gLWGd5GpKRNsV8F8-uL-gxW3q6IWjqoocGTstjbocBAN047BXWIJ_NtnfuqifhtKZpcTB0oXfJe54XD6WQLaOZgA");'></div>
+<div class="flex w-full flex-col items-stretch justify-center gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-primary text-sm font-normal leading-normal">C++</p>
+<p class="text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em] mt-1">Bank Account Management</p>
+</div>
+<p class="text-text-secondary-dark text-sm font-normal leading-normal flex-shrink-0">C++ Project - 2025</p>
+</div>
+<p class="text-text-secondary-dark text-base font-normal leading-relaxed">
+                      A robust console application demonstrating object-oriented principles in C++ for managing bank accounts, transactions, and user data.
+                    </p>
+<div class="flex items-center gap-4 mt-2">
+<a class="text-text-secondary-dark hover:text-primary transition-colors" data-alt="GitHub icon link" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>
