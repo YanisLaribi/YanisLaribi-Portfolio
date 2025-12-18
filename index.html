@@ -19,10 +19,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         rel="stylesheet" />
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.22/build/spline-viewer.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
@@ -226,12 +228,60 @@
             box-shadow: 0 0 20px var(--neon-cyan);
         }
 
+
+
+
         .loader-bg-shape {
             position: absolute;
             border-radius: 50%;
             filter: blur(100px);
             opacity: 0.5;
             z-index: 1;
+        }
+
+        /* NEW SKILLS SECTION STYLES */
+        .skill-card {
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 243, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+            background: rgba(30, 30, 30, 0.8);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            /* Adjusted size */
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: grayscale(100%) opacity(0.7);
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.2) rotate(5deg);
+            filter: grayscale(0%) opacity(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        .filter-btn {
+            background: rgba(31, 41, 55, 0.5);
+            color: #9ca3af;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(55, 65, 81, 0.8);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: rgba(37, 99, 235, 0.15);
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         }
     </style>
     <script>
@@ -402,7 +452,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-32 px-6 relative">
+        <section id="about" class="py-32 px-6 relative reveal-section">
             <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
                 <div class="order-2 md:order-1" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare
                     data-tilt-max-glare="0.5">
@@ -446,117 +496,40 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-32 px-6">
+        <!-- Skills Section (Redesigned) -->
+        <section id="skills" class="py-32 px-6 reveal-section">
             <div class="max-w-6xl mx-auto">
-                <h2
-                    class="text-5xl font-display font-black text-right mb-16 text-transparent bg-clip-text bg-gradient-to-r from-purple to-pink">
-                    02. ARSENAL</h2>
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                    <h2
+                        class="text-5xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-purple to-pink">
+                        02. ARSENAL</h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Card 1 -->
-                    <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300"
-                        data-tilt>
-                        <div class="w-16 h-16 bg-cyan/20 rounded-full flex items-center justify-center mb-6 text-cyan">
-                            <span class="material-symbols-outlined text-4xl">dns</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Backend Core</h3>
-                        <p class="text-gray-400 mb-6">Architecting robust, scalable server-side solutions.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-cyan/30 rounded-full text-cyan">C++</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-cyan/30 rounded-full text-cyan">Python</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-cyan/30 rounded-full text-cyan">SQL</span>
-                        </div>
+                    <!-- Filter Bar -->
+                    <div class="flex flex-wrap gap-2 mt-6 md:mt-0" id="filter-container">
+                        <button class="filter-btn active px-4 py-2 rounded-full text-sm font-mono font-medium"
+                            data-filter="all">All</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-sm font-mono font-medium"
+                            data-filter="frontend">Frontend</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-sm font-mono font-medium"
+                            data-filter="backend">Backend</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-sm font-mono font-medium"
+                            data-filter="ai">AI</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-sm font-mono font-medium"
+                            data-filter="devops">DevOps</button>
+                        <button class="filter-btn px-4 py-2 rounded-full text-sm font-mono font-medium"
+                            data-filter="tools">Tools</button>
                     </div>
+                </div>
 
-
-
-                    <!-- Card 2 -->
-                    <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300"
-                        data-tilt>
-                        <div
-                            class="w-16 h-16 bg-purple/20 rounded-full flex items-center justify-center mb-6 text-purple">
-                            <span class="material-symbols-outlined text-4xl">web</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Frontend Magic</h3>
-                        <p class="text-gray-400 mb-6">Crafting pixel-perfect, responsive user interfaces.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-purple/30 rounded-full text-purple">React</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-purple/30 rounded-full text-purple">Tailwind</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-purple/30 rounded-full text-purple">GSAP</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300"
-                        data-tilt>
-                        <div class="w-16 h-16 bg-pink/20 rounded-full flex items-center justify-center mb-6 text-pink">
-                            <span class="material-symbols-outlined text-4xl">rocket_launch</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">DevOps & Tools</h3>
-                        <p class="text-gray-400 mb-6">Streamlining deployment and development workflows.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-pink/30 rounded-full text-pink">Git</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-pink/30 rounded-full text-pink">Docker</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-pink/30 rounded-full text-pink">Linux</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300"
-                        data-tilt>
-                        <div class="w-16 h-16 bg-blue/20 rounded-full flex items-center justify-center mb-6 text-blue">
-                            <span class="material-symbols-outlined text-4xl">More</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">More</h3>
-                        <p class="text-gray-400 mb-6">Streamlining deployment and development workflows.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs font-mono border border-blue/30 rounded-full text-blue">ARM
-                                assembly</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-blue/30 rounded-full text-blue">Altium
-                                designer</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-blue/30 rounded-full text-blue">Circuit
-                                Design</span>
-                        </div>
-                    </div>
-
-                    <!-- Card 5 -->
-                    <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300"
-                        data-tilt>
-                        <div class="w-16 h-16 bg-pink/20 rounded-full flex items-center justify-center mb-6 text-pink">
-                            <span class="material-symbols-outlined text-4xl">Other competences</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4">Other competences</h3>
-                        <p class="text-gray-400 mb-6">Streamlining deployment and development workflows.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-pink/30 rounded-full text-pink">Teamwork</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-pink/30 rounded-full text-pink">Problem
-                                Solving</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-pink/30 rounded-full text-pink">Adaptability</span>
-                            <span
-                                class="px-3 py-1 text-xs font-mono border border-pink/30 rounded-full text-pink">Communication</span>
-                        </div>
-                    </div>
+                <!-- Skills Grid -->
+                <div id="skills-grid" class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+                    <!-- Cards will be injected here by JS -->
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-32 px-6">
+        <section id="projects" class="py-32 px-6 reveal-section">
             <div class="max-w-6xl mx-auto">
                 <h2
                     class="text-5xl font-display font-black mb-24 text-transparent bg-clip-text bg-gradient-to-r from-pink to-cyan">
@@ -670,8 +643,18 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-32 px-6 text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-cyan/5 pointer-events-none"></div>
+        <section id="contact"
+            class="min-h-screen flex flex-col justify-center py-32 px-6 pb-12 relative overflow-hidden reveal-section text-center">
+            <!-- Spline Canvas Wrapper for Full Coverage -->
+            <div class="absolute inset-0 z-0">
+                <spline-viewer loading-anim-type="spinner-small-dark"
+                    url="https://prod.spline.design/gZllRpxeLscYoIIC/scene.splinecode"
+                    class="w-full h-full min-h-screen md:min-h-0 scale-150">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAATCAYAAADxlA/3AAAJ+ElEQVR4AQCBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAACBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAGBAH7/AAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAAwAAAAMAAAADAAAAMfEHIYV7y7kAAAAASUVORK5CYII="
+                        alt="Spline preview" style="width: 100%; height: 100%;" />
+                </spline-viewer>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-cyan/5 pointer-events-none z-1"></div>
 
             <div class="max-w-3xl mx-auto relative z-10">
                 <p class="font-mono text-cyan mb-6">04. WHAT'S NEXT?</p>
@@ -834,6 +817,127 @@
                 .add(() => {
                     heroTl.play();
                 }, "-=0.5");
+        });
+
+        // --- Scroll Reveal Animations ---
+        gsap.utils.toArray('.reveal-section').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // --- Skills Section Logic ---
+        const skillsData = [
+            // Frontend
+            { name: "React", category: "frontend", icon: "devicon-react-original colored" },
+            { name: "Next.js", category: "frontend", icon: "devicon-nextjs-original-wordmark white" }, // Using white for dark mode contrast if needed, or original
+            { name: "TypeScript", category: "frontend", icon: "devicon-typescript-plain colored" },
+            { name: "Tailwind", category: "frontend", icon: "devicon-tailwindcss-original colored" },
+            { name: "JavaScript", category: "frontend", icon: "devicon-javascript-plain colored" },
+            { name: "HTML5", category: "frontend", icon: "devicon-html5-plain colored" },
+            { name: "CSS3", category: "frontend", icon: "devicon-css3-plain colored" },
+            { name: "Three.js", category: "frontend", icon: "devicon-threejs-original white" },
+
+            // Backend
+            { name: "Node.js", category: "backend", icon: "devicon-nodejs-plain colored" },
+            { name: "Express", category: "backend", icon: "devicon-express-original white" },
+            { name: "Python", category: "backend", icon: "devicon-python-plain colored" },
+            { name: "Java", category: "backend", icon: "devicon-java-plain colored" },
+            { name: "C++", category: "backend", icon: "devicon-cplusplus-plain colored" },
+            { name: "PostgreSQL", category: "backend", icon: "devicon-postgresql-plain colored" },
+            { name: "MySQL", category: "backend", icon: "devicon-mysql-plain colored" },
+
+            // AI (Using Python icons or generic if specific lib not found involved, but many are in devicon)
+            { name: "TensorFlow", category: "ai", icon: "devicon-tensorflow-original colored" },
+            { name: "PyTorch", category: "ai", icon: "devicon-pytorch-original colored" },
+            { name: "Scikit-learn", category: "ai", icon: "devicon-scikitlearn-plain colored" },
+            { name: "OpenCV", category: "ai", icon: "devicon-opencv-plain colored" },
+            { name: "Pandas", category: "ai", icon: "devicon-pandas-original colored" },
+
+            // DevOps & Tools
+            { name: "Docker", category: "devops", icon: "devicon-docker-plain colored" },
+            { name: "AWS", category: "devops", icon: "devicon-amazonwebservices-plain-wordmark colored" },
+            { name: "Linux", category: "devops", icon: "devicon-linux-plain white" },
+            { name: "Git", category: "tools", icon: "devicon-git-plain colored" },
+            { name: "Bash", category: "tools", icon: "devicon-bash-plain white" },
+            { name: "Windows", category: "tools", icon: "devicon-windows8-original colored" },
+
+            // Hardware/Other (Might need generic icons if devicon lacks specific ones)
+            { name: "Arduino", category: "tools", icon: "devicon-arduino-plain colored" },
+            { name: "Raspberry Pi", category: "tools", icon: "devicon-raspberrypi-line colored" },
+        ];
+
+        const skillsGrid = document.getElementById('skills-grid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        function renderSkills(filter = 'all') {
+            // Clear grid
+            skillsGrid.innerHTML = '';
+
+            // Filter data
+            const filteredSkills = filter === 'all'
+                ? skillsData
+                : skillsData.filter(skill => skill.category === filter || (filter === 'tools' && (skill.category === 'tools' || skill.category === 'devops'))); // combining devops/tools for simpler UI if wanted, or separate
+
+            // For this specific request, let's keep strict filtering but maybe group "hardware" into tools if needed. 
+            // Better: strictly follow the buttons I created.
+            // Adjust: 'tools' button maps to 'tools' category. 'devops' to 'devops'.
+
+            const displaySkills = filter === 'all'
+                ? skillsData
+                : skillsData.filter(skill => skill.category === filter);
+
+            displaySkills.forEach((skill, index) => {
+                const card = document.createElement('div');
+                card.className = 'skill-card rounded-xl p-2 flex flex-col items-center justify-center aspect-square overflow-hidden opacity-0 transform translate-y-4';
+
+                // Icon handling (Devicon font classes)
+                // Special handling for white/dark mode visibility could be refined, 
+                // but 'colored' usually works well against dark backgrounds.
+                // For white icons, we ensure they are white.
+                const iconClass = skill.icon.includes('white')
+                    ? skill.icon.replace('white', '') + ' text-white'
+                    : skill.icon;
+
+                card.innerHTML = `
+                    <i class="${iconClass} skill-icon mb-2"></i>
+                    <span class="font-mono text-sm text-gray-300">${skill.name}</span>
+                `;
+
+                skillsGrid.appendChild(card);
+
+                // Animate in
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    delay: index * 0.05,
+                    ease: "back.out(1.7)"
+                });
+            });
+        }
+
+        // Initial Render
+        renderSkills('all');
+
+        // Filter Click Events
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update Active State
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Render with Filter
+                renderSkills(btn.dataset.filter);
+            });
         });
 
     </script>
