@@ -1,9 +1,5 @@
 <template>
-  <LoadingScreen
-    v-if="showLoading"
-    :progress="loadingProgress"
-    @done="onLoadingDone"
-  />
+  <LoadingScreen v-if="showLoading" />
 
   <ThreeScene
     ref="threeSceneRef"
@@ -19,6 +15,11 @@
     <span>Click on the computer to enter</span>
   </div>
 
+  <HackerTerminal
+    v-if="currentView === 'terminal'"
+    @done="onTerminalDone"
+  />
+
   <RetroDesktop
     v-if="currentView === 'computer'"
     @exit-computer="onExitComputer"
@@ -27,34 +28,28 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import LoadingScreen from './components/LoadingScreen.vue'
-import ThreeScene from './components/ThreeScene.vue'
-import RetroDesktop from './components/RetroDesktop.vue'
+import LoadingScreen   from './components/LoadingScreen.vue'
+import ThreeScene      from './components/ThreeScene.vue'
+import HackerTerminal  from './components/HackerTerminal.vue'
+import RetroDesktop    from './components/RetroDesktop.vue'
 
-const currentView = ref('room')
-const showLoading = ref(true)
-const loadingProgress = ref(0)
-const hintHidden = ref(false)
+const currentView   = ref('room')
+const showLoading   = ref(true)
+const hintHidden    = ref(false)
 const threeSceneRef = ref(null)
 
 onMounted(() => {
-  const interval = setInterval(() => {
-    loadingProgress.value += Math.random() * 15
-    if (loadingProgress.value >= 100) {
-      loadingProgress.value = 100
-      clearInterval(interval)
-    }
-  }, 200)
+  setTimeout(() => { showLoading.value = false }, 3500)
 })
-
-function onLoadingDone() {
-  showLoading.value = false
-}
 
 function onEnterComputer() {
   if (currentView.value !== 'room') return
   hintHidden.value = true
-  currentView.value = 'computer'
+  currentView.value = 'terminal'   // show hacker terminal first
+}
+
+function onTerminalDone() {
+  currentView.value = 'computer'   // then launch the OS
 }
 
 function onExitComputer() {

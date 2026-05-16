@@ -1,29 +1,16 @@
 <template>
   <div class="loading-screen" :class="{ 'fade-out': fadeOut }">
-    <div class="loading-logo">Yanis Laribi</div>
-    <div class="loading-bar-container">
-      <div class="loading-bar" :style="{ width: progress + '%' }"></div>
-    </div>
-    <div class="loading-text">Loading experience...</div>
+    <div class="welcome-text">WELCOME</div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const props = defineProps({
-  progress: { type: Number, default: 0 }
-})
-
-const emit = defineEmits(['done'])
 const fadeOut = ref(false)
 
-watch(() => props.progress, (val) => {
-  if (val >= 100) {
-    setTimeout(() => {
-      fadeOut.value = true
-      setTimeout(() => emit('done'), 900)
-    }, 500)
-  }
+onMounted(() => {
+  // Start fade after 3000ms, fully gone at 3500ms (matches App.vue timer)
+  setTimeout(() => { fadeOut.value = true }, 3000)
 })
 </script>
