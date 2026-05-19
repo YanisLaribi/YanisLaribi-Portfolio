@@ -3,26 +3,29 @@
     <div v-if="isOpen" class="start-menu aero-glass" @click.stop>
       <div class="start-menu-left">
         <div 
-          v-for="icon in icons" 
-          :key="'sm-'+icon.id" 
+          v-for="res in displayResults" 
+          :key="'sm-'+res.title" 
           class="start-menu-item"
-          @click="$emit('open-app', icon)"
+          @click="handleResultClick(res)"
         >
-          <img v-if="icon.iconUrl" :src="icon.iconUrl" class="sm-img" />
-          <span v-else class="sm-icon">{{ icon.emoji }}</span>
-          <span class="sm-text">{{ icon.title }}</span>
+          <img v-if="res.iconUrl" :src="res.iconUrl" class="sm-img" />
+          <span v-else class="sm-icon">{{ res.emoji }}</span>
+          <div class="sm-details">
+            <span class="sm-text">{{ res.title }}</span>
+            <span class="sm-subtext" v-if="res.desc">{{ res.desc }}</span>
+          </div>
         </div>
         <div class="start-search">
-          <input type="text" placeholder="Search programs and files" />
+          <input type="text" placeholder="Search programs and files" v-model="searchQuery" />
         </div>
       </div>
       <div class="start-menu-right">
         <div class="user-profile">
-          <div class="user-avatar"><img src="/user.png" class="user-avatar-img" /></div>
-          <div class="user-name">Yanis Laribi</div>
+          <div class="user-avatar"><img src="/flower image loading screen windows 7.jpg" class="user-avatar-img" /></div>
+          <div class="user-name">Visitor</div>
         </div>
         <div class="right-links">
-          <div class="right-link" @click="$emit('show-coming-soon', 'Documents')">Documents</div>
+          <div class="right-link" @click="$emit('open-app', { id: 'files-explorer', title: 'Files Explorer', iconUrl: '/dossierLogo.png' })">Documents</div>
           <div class="right-link" @click="$emit('show-coming-soon', 'Pictures')">Pictures</div>
           <hr>
           <div class="right-link" @click="$emit('shutdown')">Shut down</div>
@@ -33,11 +36,42 @@
 </template>
 
 <script setup>
-defineProps({
+import { ref, computed, watch } from 'vue'
+import { searchAll } from '../config/desktopData'
+
+const props = defineProps({
   isOpen: Boolean,
   icons: Array
 })
-defineEmits(['open-app', 'show-coming-soon', 'shutdown'])
+
+const emit = defineEmits(['open-app', 'show-project', 'show-coming-soon', 'shutdown'])
+
+const searchQuery = ref('')
+
+const displayResults = computed(() => {
+  if (!searchQuery.value) {
+    return props.icons.map(icon => ({
+      title: icon.title,
+      iconUrl: icon.iconUrl,
+      emoji: icon.emoji,
+      type: 'app',
+      originalApp: icon
+    }))
+  }
+  return searchAll(searchQuery.value)
+})
+
+function handleResultClick(res) {
+  if (res.type === 'app') {
+    emit('open-app', res.originalApp)
+  } else if (res.type === 'project' || res.type === 'experience') {
+    emit('show-project', res.originalItem)
+  }
+}
+
+watch(() => props.isOpen, (newVal) => {
+  if (!newVal) searchQuery.value = ''
+})
 </script>
 
 <style scoped>
@@ -95,9 +129,25 @@ defineEmits(['open-app', 'show-coming-soon', 'shutdown'])
   margin-right: 10px;
 }
 
+
+
+.sm-details {
+  display: flex;
+  flex-direction: column;
+}
+
 .sm-text {
   font-size: 14px;
   color: #333;
+}
+
+.sm-subtext {
+  font-size: 10px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
 }
 
 .start-search {

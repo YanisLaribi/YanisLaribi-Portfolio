@@ -42,37 +42,67 @@
         </div>
       </div>
       <div class="window-content-area">
-        <div class="window-body">
+        <FileExplorer 
+          v-if="['projects', 'files-explorer', 'experience'].includes(win.id)"
+          :initialFolder="win.id === 'files-explorer' ? 'desktop' : win.id"
+          @show-coming-soon="showComingSoon"
+          @open-app="openWindow"
+          @show-project="showProjectAlert"
+        />
+        <div class="window-body" v-else>
           <template v-if="win.id === 'about'">
-            <h2>About Me</h2>
-            <p>Hi, I'm Yanis Laribi, a Software Engineering Student.</p>
-            <p>I have a passion for web development, 3D graphics, machine learning, and cybersecurity.</p>
-          </template>
-          <template v-else-if="win.id === 'projects'">
-            <h2>My Projects</h2>
-            <ul>
-              <li><b>BatiBloc:</b> Construction simulation with 2D/3D visualization.</li>
-              <li><b>Medical Case Simulator:</b> 3-tier web app for clinical simulations.</li>
-              <li><b>CANLock:</b> AI anomaly detection on CAN bus vehicular networks.</li>
-              <li><b>Web Automation Agent:</b> Autonomous agent bypassing anti-bot mechanisms.</li>
-            </ul>
-          </template>
-          <template v-else-if="win.id === 'experience'">
-            <h2>Experience</h2>
-            <p><b>Data Science Intern</b> — Federal Government of Canada (ECCC) <br><i>May–Aug 2026</i></p>
-            <p><b>Researcher</b> — SGD Beyond (ML Club) <br><i>2025–2026</i></p>
+            <div class="about-app">
+              <div class="about-header">
+                <img src="/user.png" class="about-avatar" />
+                <div class="about-title">
+                  <h2>Yanis Laribi</h2>
+                  <p class="about-subtitle">Software Engineering Student • Université Laval</p>
+                </div>
+              </div>
+              <div class="about-body">
+                <p class="about-paragraph first-letter">I grew up in Algeria and came to Canada when I was six. One bedroom for three people, no table to eat at, and a country where the language was a mystery to my eyes. But my father had kept his laptop from Algeria, and that changed everything. Every free moment I had, I was in front of that screen. I didn’t know it then, but that’s where my obsession with technology quietly took root.</p>
+
+                <p class="about-paragraph">Little after, in high school, a teacher introduced me to Scratch. The moment I moved that cartoon cat across the screen, something clicked. I remember thinking: <em>That I was limitless, and I could do anything (yes at 12 years old a simple cartoon cat made me feel that)</em> <span class="about-sidenote">(Data structures, algorithms, statistics and probabilities were still somewhere over the horizon... they’d show up soon enough.)</span></p>
+
+                <p class="about-paragraph">That conviction never left me. When it came time to choose a path, Software Engineering was the only natural answer. Since then, I’ve been pushing myself forward with an unlimited curiosity and a perseverance that was forged long before university...</p>
+
+                <p class="about-paragraph">Outside of code, I lift weights, play sports, and travel whenever I can. The gym keeps me sane. Travelling keeps me humble. And sports remind me that losing is fine, as long as you show up again the next day. Which, honestly, applies to programming too.</p>
+
+                <p class="about-paragraph">Anyway, I hope you know me a little better now. Feel free to reach out, I don't bite.</p>
+
+              </div>
+            </div>
           </template>
           <template v-else-if="win.id === 'contacts'">
-            <h2>Contact Information</h2>
-            <p><b>Email:</b> yanis.laribi.1@ulaval.ca</p>
-            <p><b>Phone:</b> 418-264-7838</p>
-            <p><b>LinkedIn:</b> linkedin.com/in/yanislaribi</p>
-            <p><b>GitHub:</b> github.com/YanisLaribi</p>
-          </template>
-          <template v-else-if="win.id === 'resume'">
-            <h2>Resume</h2>
-            <p>Click below to download my resume.</p>
-            <a href="#" class="download-btn" @click.prevent="downloadResume">Download CV</a>
+            <div class="contacts-app">
+              <div class="contacts-header">
+                <img src="/ContactIcone.webp" class="contacts-header-icon" />
+                <div class="contacts-header-text">
+                  <h2>Contact Yanis</h2>
+                  <p>Let's get in touch!</p>
+                </div>
+              </div>
+              <div class="contacts-body">
+                <div class="contacts-info">
+                  <div class="contact-item"><strong>Email:</strong> yanis.laribi.1@ulaval.ca</div>
+                  <div class="contact-item"><strong>Phone:</strong> 418-264-7838</div>
+                  <div class="contact-item"><strong>LinkedIn:</strong> linkedin.com/in/yanislaribi</div>
+                  <div class="contact-item"><strong>GitHub:</strong> github.com/YanisLaribi</div>
+                </div>
+                <form class="contacts-form" @submit.prevent="sendMail">
+                  <h3>Send an Email</h3>
+                  <div class="form-group">
+                    <label>Subject:</label>
+                    <input type="text" v-model="mailSubject" class="win7-input" placeholder="Enter subject..." required />
+                  </div>
+                  <div class="form-group">
+                    <label>Message:</label>
+                    <textarea v-model="mailBody" class="win7-textarea" placeholder="Type your message here..." required></textarea>
+                  </div>
+                  <button type="submit" class="win7-button send-btn">Send Email via Default Client</button>
+                </form>
+              </div>
+            </div>
           </template>
         </div>
       </div>
@@ -85,7 +115,7 @@
     <!-- Start Menu -->
     <StartMenu 
       :isOpen="isStartMenuOpen" 
-      :icons="desktopIcons"
+      :icons="startMenuIcons"
       @open-app="openWindow"
       @show-coming-soon="showComingSoon"
       @shutdown="handleShutdown"
@@ -110,7 +140,8 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import DialogBox from './DialogBox.vue'
 import StartMenu from './StartMenu.vue'
 import Taskbar from './Taskbar.vue'
-import { desktopIcons } from '../config/desktopData'
+import FileExplorer from './FileExplorer.vue'
+import { desktopIcons, startMenuIcons, getIconById } from '../config/desktopData'
 
 const emit = defineEmits(['exit-computer'])
 
@@ -162,6 +193,10 @@ function openWindow(icon) {
     window.open('https://linkedin.com/in/yanislaribi', '_blank')
     return
   }
+  if (icon.id === 'resume') {
+    window.open('/Resume-summer2026 (1).pdf', '_blank')
+    return
+  }
   const existing = windows.value.find(w => w.id === icon.id)
   if (existing) {
     existing.minimized = false
@@ -177,8 +212,8 @@ function openWindow(icon) {
     iconUrl: icon.iconUrl,
     x: 100 + offset,
     y: 100 + offset,
-    width: 600,
-    height: 400,
+    width: ['projects', 'files-explorer', 'experience'].includes(icon.id) ? 800 : 600,
+    height: ['projects', 'files-explorer', 'experience'].includes(icon.id) ? 550 : 400,
     minimized: false,
     maximized: false,
     zIndex: ++zIndexCounter
@@ -277,12 +312,27 @@ function handleShutdown() {
   )
 }
 
+const mailSubject = ref('')
+const mailBody = ref('')
+
+function sendMail() {
+  window.open(`mailto:yanis.laribi.1@ulaval.ca?subject=${encodeURIComponent(mailSubject.value)}&body=${encodeURIComponent(mailBody.value)}`, '_blank')
+}
+
 function showComingSoon(folder) {
   isStartMenuOpen.value = false
   showAlert(
     folder,
     'Coming soon!',
     'This feature is currently under development. Please check back later.'
+  )
+}
+
+function showProjectAlert(project) {
+  showAlert(
+    project.name,
+    'Project Details',
+    project.desc
   )
 }
 
@@ -589,7 +639,302 @@ function stopResize() {
   cursor: nwse-resize;
 }
 
-/* Sub-component styles removed */
+/* About App Styles */
+.about-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  margin: -20px;
+  background: #f8f9fa;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(to bottom, #ffffff, #e1eaf5);
+  border-bottom: 1px solid #99b4d1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-header::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+  pointer-events: none;
+}
+
+.about-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  border: 1px solid #b9cce3;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  margin-right: 20px;
+  background: #fff;
+  padding: 4px;
+  object-fit: contain;
+}
+
+.about-title h2 {
+  margin: 0 !important;
+  color: #003399 !important;
+  font-size: 24px !important;
+  font-weight: 600;
+  text-shadow: 1px 1px 0px #fff;
+  border: none !important;
+  padding-bottom: 0 !important;
+}
+
+.about-subtitle {
+  margin: 2px 0 4px 0;
+  color: #555;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.about-tag {
+  background: #dce8f5;
+  border: 1px solid #b0cde8;
+  color: #1a4273;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.about-body {
+  padding: 25px 30px;
+  flex: 1;
+  overflow-y: auto;
+  background: #fff;
+  line-height: 1.7;
+  color: #2b2b2b;
+}
+
+.about-paragraph {
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.about-paragraph.first-letter::first-letter {
+  font-size: 42px;
+  font-weight: bold;
+  color: #003399;
+  float: left;
+  line-height: 0.8;
+  margin-right: 8px;
+  margin-top: 4px;
+  font-family: "Georgia", serif;
+}
+
+.about-sidenote {
+  color: #666;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.about-quote {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-left: 4px solid #003399;
+  margin: 20px 0;
+  background: #f4f8fc;
+  padding: 14px 18px;
+  border-radius: 0 4px 4px 0;
+}
+
+.about-quote-mark {
+  font-size: 48px;
+  line-height: 1;
+  color: #003399;
+  opacity: 0.3;
+  font-family: "Georgia", serif;
+  margin-top: -10px;
+  flex-shrink: 0;
+}
+
+.about-quote-text {
+  font-style: italic;
+  color: #1a4273;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.about-skills {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.about-skill-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.about-skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about-skill-pill {
+  background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+  border: 1px solid #c5c5c5;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: #333;
+  cursor: default;
+  transition: all 0.15s;
+}
+
+.about-skill-pill:hover {
+  background: linear-gradient(to bottom, #eaf6fd, #bee6fd);
+  border-color: #3c7fb1;
+  color: #003399;
+}
+
+/* Contacts App Styles */
+.contacts-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  margin: -20px; /* offset the default .window-body padding */
+}
+
+.contacts-header {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.contacts-header-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+
+.contacts-header-text h2 {
+  margin: 0 !important;
+  color: #003399;
+  font-size: 18px;
+  border: none !important;
+  padding-bottom: 0 !important;
+}
+
+.contacts-header-text p {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+}
+
+.contacts-body {
+  padding: 15px;
+  flex: 1;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.contacts-info {
+  background: #f0f4f9;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.contact-item {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.contacts-form h3 {
+  color: #003399;
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 12px;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.win7-input, .win7-textarea {
+  border: 1px solid #abadb3;
+  border-radius: 2px;
+  padding: 4px 6px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+.win7-input:focus, .win7-textarea:focus {
+  border-color: #569de5;
+}
+
+.win7-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.win7-button {
+  background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%);
+  border: 1px solid #707070;
+  border-radius: 3px;
+  padding: 4px 15px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 12px;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.win7-button:hover {
+  background: linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%);
+  border-color: #3c7fb1;
+}
+
+.win7-button:active {
+  background: linear-gradient(to bottom, #e5f4fc 0%, #c4e5fa 50%, #98d1ef 51%, #68b3db 100%);
+  border-color: #2c628b;
+}
+
+.send-btn {
+  margin-top: 5px;
+}
 
 .icon-img {
   width: 40px;
@@ -598,6 +943,8 @@ function stopResize() {
   margin-bottom: 5px;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
+
+
 
 .titlebar-img {
   width: 16px;
