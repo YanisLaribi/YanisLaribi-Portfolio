@@ -2,7 +2,7 @@
   <!-- Boot Screen -->
   <div v-if="appState === 'boot'" class="win7-boot">
     <div class="boot-container">
-      <img src="/windows 7 logo launcher.png" alt="Windows 7 Logo" class="boot-logo" />
+      <img src="/images/windows 7 logo launcher.png" alt="Windows 7 Logo" class="boot-logo" />
       <div class="boot-title">Windows 7</div>
       
       <div class="boot-progress-bar">
@@ -19,7 +19,7 @@
   <div v-else-if="appState === 'login'" class="win7-fullscreen">
     <div class="user-account" @click="login">
       <div class="user-frame">
-        <img src="/flower image loading screen windows 7.jpg" alt="Visitor Avatar" class="user-avatar" />
+        <img src="/images/flower image loading screen windows 7.jpg" alt="Visitor Avatar" class="user-avatar" />
       </div>
       <div class="user-name">Visitor</div>
     </div>
@@ -145,7 +145,7 @@ function login() {
 .win7-fullscreen {
   position: absolute;
   inset: 0;
-  background: url('/windows7_wallpaper.jpg') no-repeat center center;
+  background: url('/images/windows7_wallpaper.jpg') no-repeat center center;
   background-size: cover;
   background-color: #166fb9;
   display: flex;

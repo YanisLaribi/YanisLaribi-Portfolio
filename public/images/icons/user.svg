@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Shadow filter for the silhouette -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.25" />
+    </filter>
+
+    <!-- Gloss gradient for the background orb -->
+    <linearGradient id="orbGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="30%" stop-color="#a0c8f0" stop-opacity="0.15" />
+      <stop offset="70%" stop-color="#3078c0" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#104080" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Glowing border gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#3078c0" stop-opacity="0.5" />
+    </linearGradient>
+
+    <!-- User Silhouette Gradient (Windows 7 glassy/metallic silver-blue look) -->
+    <linearGradient id="userGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="25%" stop-color="#e0edf8" />
+      <stop offset="60%" stop-color="#a3c9e8" />
+      <stop offset="85%" stop-color="#5693c4" />
+      <stop offset="100%" stop-color="#2d6091" />
+    </linearGradient>
+
+    <!-- User Gloss Gradient -->
+    <linearGradient id="userGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Glassy Orb Background (Vista/Win7 Aero sphere) -->
+  <circle cx="64" cy="64" r="50" fill="url(#orbGrad)" stroke="url(#borderGrad)" stroke-width="2.5" filter="url(#shadow)" />
+  
+  <!-- Inner Rim Light -->
+  <circle cx="64" cy="64" r="47.5" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" />
+
+  <!-- User Head -->
+  <circle cx="64" cy="46" r="18" fill="url(#userGrad)" filter="url(#shadow)" />
+  <!-- User Head Gloss -->
+  <path d="M 48.5,38.5 C 50.5,30 57,29 64,29 C 71,29 77.5,30 79.5,38.5 C 75,41 68,42 64,42 C 60,42 53,41 48.5,38.5 Z" fill="url(#userGloss)" />
+
+  <!-- User Shoulders/Body -->
+  <path d="M 28,94 C 28,78 38,68 64,68 C 90,68 100,78 100,94 C 95,99 80,104 64,104 C 48,104 33,99 28,94 Z" fill="url(#userGrad)" filter="url(#shadow)" />
+  
+  <!-- User Shoulders Gloss -->
+  <path d="M 33,80 C 40,73 52,71 64,71 C 76,71 88,73 95,80 C 90,77 78,74 64,74 C 50,74 38,77 33,80 Z" fill="url(#userGloss)" />
+
+  <!-- Aero Highlights (Glass reflection arc across the bottom and top) -->
+  <path d="M 20,50 C 35,28 65,22 92,32" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.4" />
+  <path d="M 36,98 C 50,106 78,106 92,98" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.2" />
+</svg>

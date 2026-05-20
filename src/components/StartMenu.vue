@@ -21,11 +21,11 @@
       </div>
       <div class="start-menu-right">
         <div class="user-profile">
-          <div class="user-avatar"><img src="/flower image loading screen windows 7.jpg" class="user-avatar-img" /></div>
+          <div class="user-avatar"><img src="/images/flower image loading screen windows 7.jpg" class="user-avatar-img" /></div>
           <div class="user-name">Visitor</div>
         </div>
         <div class="right-links">
-          <div class="right-link" @click="$emit('open-app', { id: 'files-explorer', title: 'Files Explorer', iconUrl: '/dossierLogo.png' })">Documents</div>
+          <div class="right-link" @click="$emit('open-app', { id: 'files-explorer', title: 'Files Explorer', iconUrl: '/images/icons/dossierLogo.png' })">Documents</div>
           <div class="right-link" @click="$emit('show-coming-soon', 'Pictures')">Pictures</div>
           <hr>
           <div class="right-link" @click="$emit('shutdown')">Shut down</div>
