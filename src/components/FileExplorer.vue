@@ -16,7 +16,7 @@
         ></button>
       </div>
       <div class="fe-address-bar">
-        <img src="/YanisLaribi-Portfolio/images/icons/dossierLogo.png" class="fe-address-icon" />
+        <img src="/images/icons/dossierLogo.png" class="fe-address-icon" />
         <div class="fe-breadcrumbs">
           <template v-for="(bc, idx) in breadcrumbs" :key="bc.id">
             <span class="fe-breadcrumb-item" @click="openFolder(bc.id)">{{ bc.name }}</span>
@@ -67,19 +67,19 @@
             <span class="caret">▼</span> Libraries
           </div>
           <div class="fe-sidebar-item" :class="{active: currentFolderId.startsWith('projects')}" @click="openFolder('projects')">
-            <img src="/YanisLaribi-Portfolio/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Projects
+            <img src="/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Projects
           </div>
           <div class="fe-sidebar-item" :class="{active: currentFolderId.startsWith('exp')}" @click="openFolder('experience')">
-            <img src="/YanisLaribi-Portfolio/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Experience
+            <img src="/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Experience
           </div>
           <div class="fe-sidebar-item" :class="{active: currentFolderId.startsWith('documents')}" @click="openFolder('documents')">
-            <img src="/YanisLaribi-Portfolio/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Documents
+            <img src="/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Documents
           </div>
           <div class="fe-sidebar-item" @click="$emit('show-coming-soon', 'Music')">
-            <img src="/YanisLaribi-Portfolio/images/icons/music folder.png" class="fe-sidebar-img" /> Music
+            <img src="/images/icons/music folder.png" class="fe-sidebar-img" /> Music
           </div>
           <div class="fe-sidebar-item" @click="$emit('show-coming-soon', 'Pictures')">
-            <img src="/YanisLaribi-Portfolio/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Pictures
+            <img src="/images/icons/dossierLogo.png" class="fe-sidebar-img" /> Pictures
           </div>
         </div>
         

@@ -82,7 +82,7 @@ defineEmits(['toggle-start-menu', 'toggle-taskbar-window', 'minimize-all'])
 .win-logo {
   width: 36px;
   height: 36px;
-  background: url('/YanisLaribi-Portfolio/images/windows 7 logo launcher.png') center/contain no-repeat;
+  background: url('/images/windows 7 logo launcher.png') center/contain no-repeat;
   filter: drop-shadow(0 0 2px rgba(255,255,255,0.4));
 }
 

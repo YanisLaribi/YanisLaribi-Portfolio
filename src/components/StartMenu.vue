@@ -21,7 +21,7 @@
       </div>
       <div class="start-menu-right">
         <div class="user-profile">
-          <div class="user-avatar"><img src="/YanisLaribi-Portfolio/images/flower image loading screen windows 7.jpg" class="user-avatar-img" /></div>
+          <div class="user-avatar"><img src="/images/flower image loading screen windows 7.jpg" class="user-avatar-img" /></div>
           <div class="user-name">Visitor</div>
         </div>
         <div class="right-links">
