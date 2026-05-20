@@ -1,7 +1,7 @@
 <template>
   <div class="about-app">
     <div class="about-header">
-      <img src="/images/icons/user.svg" class="about-avatar" />
+      <img src="/YanisLaribi-Portfolio/images/icons/user.svg" class="about-avatar" />
       <div class="about-title">
         <h2>Yanis Laribi</h2>
         <p class="about-subtitle">Software Engineering Student • Université Laval</p>

@@ -14,7 +14,7 @@ export function useWindowManager(showComingSoon) {
       return
     }
     if (icon.id === 'resume') {
-      window.open('/resume/Resume-summer2026.pdf', '_blank')
+      window.open('/YanisLaribi-Portfolio/resume/Resume-summer2026.pdf', '_blank')
       return
     }
     const existing = windows.value.find(w => w.id === icon.id)

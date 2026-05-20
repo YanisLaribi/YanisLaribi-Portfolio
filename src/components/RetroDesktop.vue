@@ -178,7 +178,7 @@ function handleShutdown() {
 .win7-os {
   position: absolute;
   inset: 0;
-  background: url('/images/windows7_wallpaper.jpg') no-repeat center center;
+  background: url('/YanisLaribi-Portfolio/images/windows7_wallpaper.jpg') no-repeat center center;
   background-size: cover;
   background-color: #166fb9;
   font-family: "Segoe UI", Tahoma, sans-serif;
