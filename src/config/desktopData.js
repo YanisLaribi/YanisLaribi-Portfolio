@@ -2,18 +2,18 @@ import { projects } from './projects'
 import { experiences } from './experience'
 
 export const desktopIcons = [
-  { id: 'about', title: 'YanisLaribi', iconUrl: '/images/icons/user.svg', emoji: '🧑‍💻' },
-  { id: 'projects', title: 'Projects', iconUrl: '/images/icons/dossierLogo.png', emoji: '📁' },
-  { id: 'experience', title: 'Experience', iconUrl: '/images/icons/dossierLogo.png', emoji: '📈' },
-  { id: 'contacts', title: 'Contacts', iconUrl: '/images/icons/ContactIcone.webp', emoji: '📇' },
+  { id: 'about', title: 'YanisLaribi', iconUrl: '/YanisLaribi-Portfolio/images/icons/user.svg', emoji: '🧑‍💻' },
+  { id: 'projects', title: 'Projects', iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png', emoji: '📁' },
+  { id: 'experience', title: 'Experience', iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png', emoji: '📈' },
+  { id: 'contacts', title: 'Contacts', iconUrl: '/YanisLaribi-Portfolio/images/icons/ContactIcone.webp', emoji: '📇' },
   { id: 'resume', title: 'Download CV', iconUrl: '', emoji: '📄' },
-  { id: 'linkedin', title: 'LinkedIn', iconUrl: '/images/icons/linkedin.svg', emoji: '🔗' },
-  { id: 'music', title: 'Music', iconUrl: '/images/icons/music folder.png', emoji: '🎵' }
+  { id: 'linkedin', title: 'LinkedIn', iconUrl: '/YanisLaribi-Portfolio/images/icons/linkedin.svg', emoji: '🔗' },
+  { id: 'music', title: 'Music', iconUrl: '/YanisLaribi-Portfolio/images/icons/music folder.png', emoji: '🎵' }
 ]
 
 export const startMenuIcons = [
-  { id: 'about', title: 'YanisLaribi', iconUrl: '/images/icons/user.svg', emoji: '🧑‍💻' },
-  { id: 'files-explorer', title: 'Files Explorer', iconUrl: '/images/icons/dossierLogo.png', emoji: '📁' }
+  { id: 'about', title: 'YanisLaribi', iconUrl: '/YanisLaribi-Portfolio/images/icons/user.svg', emoji: '🧑‍💻' },
+  { id: 'files-explorer', title: 'Files Explorer', iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png', emoji: '📁' }
 ]
 
 export const getIconById = (id) => desktopIcons.find(i => i.id === id) || startMenuIcons.find(i => i.id === id)
@@ -24,9 +24,9 @@ export const folders = {
     name: 'Libraries',
     path: 'Libraries',
     items: [
-      { name: 'Projects', desc: 'Library Folder', type: 'folder', folderId: 'projects', iconUrl: '/images/icons/dossierLogo.png', emoji: '📁' },
-      { name: 'Experience', desc: 'Library Folder', type: 'folder', folderId: 'experience', iconUrl: '/images/icons/dossierLogo.png', emoji: '📈' },
-      { name: 'Documents', desc: 'Library Folder', type: 'folder', folderId: 'documents', iconUrl: '/images/icons/dossierLogo.png', emoji: '📄' }
+      { name: 'Projects', desc: 'Library Folder', type: 'folder', folderId: 'projects', iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png', emoji: '📁' },
+      { name: 'Experience', desc: 'Library Folder', type: 'folder', folderId: 'experience', iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png', emoji: '📈' },
+      { name: 'Documents', desc: 'Library Folder', type: 'folder', folderId: 'documents', iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png', emoji: '📄' }
     ]
   },
   projects: {
@@ -98,7 +98,7 @@ export function searchAll(query) {
       results.push({
         title: item.name,
         desc: item.desc,
-        iconUrl: item.iconUrl || '/images/icons/dossierLogo.png',
+        iconUrl: item.iconUrl || '/YanisLaribi-Portfolio/images/icons/dossierLogo.png',
         emoji: item.emoji || '📄',
         type: 'project',
         originalItem: item
@@ -112,7 +112,7 @@ export function searchAll(query) {
       results.push({
         title: item.name,
         desc: item.desc,
-        iconUrl: item.iconUrl || '/images/icons/dossierLogo.png',
+        iconUrl: item.iconUrl || '/YanisLaribi-Portfolio/images/icons/dossierLogo.png',
         emoji: item.emoji || '📄',
         type: 'experience',
         originalItem: item
@@ -126,7 +126,7 @@ export function searchAll(query) {
       results.push({
         title: item.name,
         desc: item.desc,
-        iconUrl: item.iconUrl || '/images/icons/dossierLogo.png',
+        iconUrl: item.iconUrl || '/YanisLaribi-Portfolio/images/icons/dossierLogo.png',
         emoji: item.emoji || '📄',
         type: item.type,
         originalItem: item

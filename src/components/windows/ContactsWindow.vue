@@ -1,7 +1,7 @@
 <template>
   <div class="contacts-app">
     <div class="contacts-header">
-      <img src="/images/icons/ContactIcone.webp" class="contacts-header-icon" />
+      <img src="/YanisLaribi-Portfolio/images/icons/ContactIcone.webp" class="contacts-header-icon" />
       <div class="contacts-header-text">
         <h2>Contact Yanis</h2>
         <p>Let's get in touch!</p>
