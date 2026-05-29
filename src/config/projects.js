@@ -1,11 +1,11 @@
 export const projects = [
-  { 
-    id: 'batibloc',
-    name: 'BâtiBloc.txt', 
-    desc: 'Text Document', 
-    type: 'project', 
-    group: 'Desktop',
-    emoji: '📝',
+  {
+    id: "batibloc",
+    name: "BâtiBloc.txt",
+    desc: "Text Document",
+    type: "project",
+    group: "Desktop",
+    emoji: "📝",
     content: `==================================================
 PROJECT: BâtiBloc
 ACCOLADES: 
@@ -25,15 +25,15 @@ A full-stack construction tool bridging architectural PDF blueprints and job-sit
 * User Experience: Persistent custom .batibloc file format, filterable action history with full Undo/Redo capabilities (Command pattern), and an integrated helper chatbot.
 
 [ARCHITECTURE & DESIGN]
-* Architected a clean layered architecture (Domain / Application DTO / Presentation) ensuring complete separation of concerns and robust 2D/3D state synchronization.`
+* Architected a clean layered architecture (Domain / Application DTO / Presentation) ensuring complete separation of concerns and robust 2D/3D state synchronization.`,
   },
-  { 
-    id: 'medical-simulator',
-    name: 'Medical Case Simulator.txt', 
-    desc: 'Text Document', 
-    type: 'project', 
-    group: 'Web Design & Apps',
-    emoji: '📝',
+  {
+    id: "medical-simulator",
+    name: "Medical Case Simulator.txt",
+    desc: "Text Document",
+    type: "project",
+    group: "Web Design & Apps",
+    emoji: "📝",
     content: `==================================================
 PROJECT: Medical Case Simulator
 TECHNOLOGY STACK: Python, Flask, MySQL, Vanilla JS (HTML5/Vanilla CSS)
@@ -50,15 +50,15 @@ A secure, 3-tier web application developed for medical clinical case simulations
 
 [TECHNICAL CHALLENGES OVERCOME]
 * Designing complex SQL queries, triggers, and stored procedures paired with strategic database indexing to guarantee real-time forum analytics.
-* Meeting WCAG AA accessibility standards using pure Vanilla JS and CSS for maximum visual performance and screen reader compatibility.`
+* Meeting WCAG AA accessibility standards using pure Vanilla JS and CSS for maximum visual performance and screen reader compatibility.`,
   },
-  { 
-    id: 'web-agent',
-    name: 'Secure Web Automation.txt', 
-    desc: 'Text Document', 
-    type: 'project', 
-    group: 'Systems',
-    emoji: '📝',
+  {
+    id: "web-agent",
+    name: "Secure Web Automation.txt",
+    desc: "Text Document",
+    type: "project",
+    group: "Systems",
+    emoji: "📝",
     content: `==================================================
 PROJECT: Secure Web Automation (ConUHack26)
 TECHNOLOGY STACK: Python, Selenium, Wireshark, Bash
@@ -74,15 +74,15 @@ An autonomous agent built during the ConUHack26 hackathon, designed to successfu
 
 [TECHNICAL CHALLENGES OVERCOME]
 * Bypassing sophisticated browser integrity checks and state tracking without triggering security alerts.
-* Extracting critical connection handshake and protocol data via Wireshark under tight hackathon timelines.`
+* Extracting critical connection handshake and protocol data via Wireshark under tight hackathon timelines.`,
   },
-  { 
-    id: 'banking-system',
-    name: 'Banking System.txt', 
-    desc: 'Text Document', 
-    type: 'project', 
-    group: 'Systems',
-    emoji: '📝',
+  {
+    id: "banking-system",
+    name: "Banking System.txt",
+    desc: "Text Document",
+    type: "project",
+    group: "Systems",
+    emoji: "📝",
     content: `==================================================
 PROJECT: Banking System
 TECHNOLOGY STACK: C++, Qt, QMake, Git
@@ -95,15 +95,15 @@ An object-oriented banking desktop application designed to provide secure, robus
 * Object-Oriented Design: Developed with clean C++ OOP principles, utilizing strong encapsulation, inheritance, and polymorphism.
 * Desktop GUI: Native desktop interface designed using the Qt framework.
 * Secure Transaction Processing: Validated and processed banking ledger transactions with multi-level constraint checks.
-* Hierarchical Exception Handling: Implemented a robust custom exception class hierarchy to handle operational and transaction faults gracefully, preventing data corruption.`
+* Hierarchical Exception Handling: Implemented a robust custom exception class hierarchy to handle operational and transaction faults gracefully, preventing data corruption.`,
   },
   {
-    id: 'portfolio-website',
-    name: 'Portfolio Website.txt',
-    desc: 'Text Document',
-    type: 'project',
-    group: 'Web Design & Apps',
-    emoji: '📝',
+    id: "portfolio-website",
+    name: "Portfolio Website.txt",
+    desc: "Text Document",
+    type: "project",
+    group: "Web Design & Apps",
+    emoji: "📝",
     content: `==================================================
 PROJECT: Portfolio Website (Windows 7 Experience)
 TECHNOLOGY STACK: Vue.js 3, Vite, JavaScript, HTML5, CSS3
@@ -125,6 +125,6 @@ An immersive, fully interactive portfolio website designed as a faithful recreat
 * Component-Based Architecture: Clean separation into reusable Vue.js components (RetroDesktop, FileExplorer, StartMenu, Taskbar, DialogBox, and dedicated window content components).
 * Composable Pattern: Logic extracted into Vue 3 composables (useWindowManager, useDragResize, useDialog, useClock) for clean separation of concerns.
 * Data-Driven Design: Project and experience content defined in dedicated configuration modules, enabling easy content updates without touching UI code.
-* Scoped Styling: Each component encapsulates its own styles, preventing CSS conflicts while maintaining the cohesive Windows 7 visual language.`
-  }
-]
+* Scoped Styling: Each component encapsulates its own styles, preventing CSS conflicts while maintaining the cohesive Windows 7 visual language.`,
+  },
+];

@@ -7,8 +7,8 @@
       <span class="notepad-menu-item"><u>V</u>iew</span>
       <span class="notepad-menu-item"><u>H</u>elp</span>
     </div>
-    <div 
-      class="notepad-textarea" 
+    <div
+      class="notepad-textarea"
       v-html="formatNotepadText(projectData?.content)"
     ></div>
   </div>
@@ -16,25 +16,37 @@
 
 <script setup>
 const props = defineProps({
-  projectData: Object
-})
+  projectData: Object,
+});
 
 function formatNotepadText(text) {
-  if (!text) return '';
+  if (!text) return "";
   let formatted = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
-  
+
   // Separators
-  formatted = formatted.replace(/(={10,})/g, '<span class="np-separator">$1</span>');
+  formatted = formatted.replace(
+    /(={10,})/g,
+    '<span class="np-separator">$1</span>',
+  );
   // Headers [TEXT]
-  formatted = formatted.replace(/\[(.*?)\]/g, '<span class="np-header">[$1]</span>');
+  formatted = formatted.replace(
+    /\[(.*?)\]/g,
+    '<span class="np-header">[$1]</span>',
+  );
   // Key value pairs
-  formatted = formatted.replace(/^(PROJECT:|ROLE:|TECHNOLOGY STACK:|ACCOLADES:|ORGANIZATION:|LOCATION:|DURATION:|COLLABORATION:)/gm, '<span class="np-key">$1</span>');
+  formatted = formatted.replace(
+    /^(PROJECT:|ROLE:|TECHNOLOGY STACK:|ACCOLADES:|ORGANIZATION:|LOCATION:|DURATION:|COLLABORATION:)/gm,
+    '<span class="np-key">$1</span>',
+  );
   // Lists
-  formatted = formatted.replace(/^\* (.*)/gm, '<span class="np-list-bullet">*</span> <span class="np-list-item">$1</span>');
-  
+  formatted = formatted.replace(
+    /^\* (.*)/gm,
+    '<span class="np-list-bullet">*</span> <span class="np-list-item">$1</span>',
+  );
+
   return formatted;
 }
 </script>
@@ -76,14 +88,14 @@ function formatNotepadText(text) {
   border: none;
   outline: none;
   padding: 15px;
-  font-family: 'Consolas', 'Courier New', monospace;
+  font-family: "Consolas", "Courier New", monospace;
   font-size: 14px;
   line-height: 1.6;
   color: #24292e;
   background: #ffffff;
   overflow-y: auto;
   white-space: pre-wrap;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
 }
 
 /* Syntax Highlighting for Notepad */

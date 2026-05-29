@@ -9,35 +9,57 @@
     </div>
     <div class="contacts-body">
       <div class="contacts-info">
-        <div class="contact-item"><strong>Email:</strong> yanis.laribi.1@ulaval.ca</div>
+        <div class="contact-item">
+          <strong>Email:</strong> yanis.laribi.1@ulaval.ca
+        </div>
         <div class="contact-item"><strong>Phone:</strong> 418-264-7838</div>
-        <div class="contact-item"><strong>LinkedIn:</strong> linkedin.com/in/yanislaribi</div>
-        <div class="contact-item"><strong>GitHub:</strong> github.com/YanisLaribi</div>
+        <div class="contact-item">
+          <strong>LinkedIn:</strong> linkedin.com/in/yanislaribi
+        </div>
+        <div class="contact-item">
+          <strong>GitHub:</strong> github.com/YanisLaribi
+        </div>
       </div>
       <form class="contacts-form" @submit.prevent="sendMail">
         <h3>Send an Email</h3>
         <div class="form-group">
           <label>Subject:</label>
-          <input type="text" v-model="mailSubject" class="win7-input" placeholder="Enter subject..." required />
+          <input
+            type="text"
+            v-model="mailSubject"
+            class="win7-input"
+            placeholder="Enter subject..."
+            required
+          />
         </div>
         <div class="form-group">
           <label>Message:</label>
-          <textarea v-model="mailBody" class="win7-textarea" placeholder="Type your message here..." required></textarea>
+          <textarea
+            v-model="mailBody"
+            class="win7-textarea"
+            placeholder="Type your message here..."
+            required
+          ></textarea>
         </div>
-        <button type="submit" class="win7-button send-btn">Send Email via Default Client</button>
+        <button type="submit" class="win7-button send-btn">
+          Send Email via Default Client
+        </button>
       </form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const mailSubject = ref('')
-const mailBody = ref('')
+const mailSubject = ref("");
+const mailBody = ref("");
 
 function sendMail() {
-  window.open(`mailto:yanis.laribi.1@ulaval.ca?subject=${encodeURIComponent(mailSubject.value)}&body=${encodeURIComponent(mailBody.value)}`, '_blank')
+  window.open(
+    `mailto:yanis.laribi.1@ulaval.ca?subject=${encodeURIComponent(mailSubject.value)}&body=${encodeURIComponent(mailBody.value)}`,
+    "_blank",
+  );
 }
 </script>
 
@@ -122,7 +144,8 @@ function sendMail() {
   margin-bottom: 3px;
 }
 
-.win7-input, .win7-textarea {
+.win7-input,
+.win7-textarea {
   border: 1px solid #abadb3;
   border-radius: 2px;
   padding: 4px 6px;
@@ -131,7 +154,8 @@ function sendMail() {
   outline: none;
 }
 
-.win7-input:focus, .win7-textarea:focus {
+.win7-input:focus,
+.win7-textarea:focus {
   border-color: #569de5;
 }
 
@@ -141,7 +165,13 @@ function sendMail() {
 }
 
 .win7-button {
-  background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%);
+  background: linear-gradient(
+    to bottom,
+    #f2f2f2 0%,
+    #ebebeb 50%,
+    #dddddd 51%,
+    #cfcfcf 100%
+  );
   border: 1px solid #707070;
   border-radius: 3px;
   padding: 4px 15px;
@@ -153,12 +183,24 @@ function sendMail() {
 }
 
 .win7-button:hover {
-  background: linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%);
+  background: linear-gradient(
+    to bottom,
+    #eaf6fd 0%,
+    #d9f0fc 50%,
+    #bee6fd 51%,
+    #a7d9f5 100%
+  );
   border-color: #3c7fb1;
 }
 
 .win7-button:active {
-  background: linear-gradient(to bottom, #e5f4fc 0%, #c4e5fa 50%, #98d1ef 51%, #68b3db 100%);
+  background: linear-gradient(
+    to bottom,
+    #e5f4fc 0%,
+    #c4e5fa 50%,
+    #98d1ef 51%,
+    #68b3db 100%
+  );
   border-color: #2c628b;
 }
 

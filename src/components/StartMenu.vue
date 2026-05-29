@@ -2,9 +2,9 @@
   <transition name="fade-slide">
     <div v-if="isOpen" class="start-menu aero-glass" @click.stop>
       <div class="start-menu-left">
-        <div 
-          v-for="res in displayResults" 
-          :key="'sm-'+res.title" 
+        <div
+          v-for="res in displayResults"
+          :key="'sm-' + res.title"
           class="start-menu-item"
           @click="handleResultClick(res)"
         >
@@ -16,18 +16,43 @@
           </div>
         </div>
         <div class="start-search">
-          <input type="text" placeholder="Search programs and files" v-model="searchQuery" />
+          <input
+            type="text"
+            placeholder="Search programs and files"
+            v-model="searchQuery"
+          />
         </div>
       </div>
       <div class="start-menu-right">
         <div class="user-profile">
-          <div class="user-avatar"><img src="/images/flower image loading screen windows 7.jpg" class="user-avatar-img" /></div>
+          <div class="user-avatar">
+            <img
+              src="/images/flower image loading screen windows 7.jpg"
+              class="user-avatar-img"
+            />
+          </div>
           <div class="user-name">Visitor</div>
         </div>
         <div class="right-links">
-          <div class="right-link" @click="$emit('open-app', { id: 'files-explorer', title: 'Files Explorer', iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png' })">Documents</div>
-          <div class="right-link" @click="$emit('show-coming-soon', 'Pictures')">Pictures</div>
-          <hr>
+          <div
+            class="right-link"
+            @click="
+              $emit('open-app', {
+                id: 'files-explorer',
+                title: 'Files Explorer',
+                iconUrl: '/YanisLaribi-Portfolio/images/icons/dossierLogo.png',
+              })
+            "
+          >
+            Documents
+          </div>
+          <div
+            class="right-link"
+            @click="$emit('show-coming-soon', 'Pictures')"
+          >
+            Pictures
+          </div>
+          <hr />
           <div class="right-link" @click="$emit('shutdown')">Shut down</div>
         </div>
       </div>
@@ -36,42 +61,50 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { searchAll } from '../config/desktopData'
+import { ref, computed, watch } from "vue";
+import { searchAll } from "../config/desktopData";
 
 const props = defineProps({
   isOpen: Boolean,
-  icons: Array
-})
+  icons: Array,
+});
 
-const emit = defineEmits(['open-app', 'show-project', 'show-coming-soon', 'shutdown'])
+const emit = defineEmits([
+  "open-app",
+  "show-project",
+  "show-coming-soon",
+  "shutdown",
+]);
 
-const searchQuery = ref('')
+const searchQuery = ref("");
 
 const displayResults = computed(() => {
   if (!searchQuery.value) {
-    return props.icons.map(icon => ({
+    return props.icons.map((icon) => ({
       title: icon.title,
       iconUrl: icon.iconUrl,
       emoji: icon.emoji,
-      type: 'app',
-      originalApp: icon
-    }))
+      type: "app",
+      originalApp: icon,
+    }));
   }
-  return searchAll(searchQuery.value)
-})
+  return searchAll(searchQuery.value);
+});
 
 function handleResultClick(res) {
-  if (res.type === 'app') {
-    emit('open-app', res.originalApp)
-  } else if (res.type === 'project' || res.type === 'experience') {
-    emit('show-project', res.originalItem)
+  if (res.type === "app") {
+    emit("open-app", res.originalApp);
+  } else if (res.type === "project" || res.type === "experience") {
+    emit("show-project", res.originalItem);
   }
 }
 
-watch(() => props.isOpen, (newVal) => {
-  if (!newVal) searchQuery.value = ''
-})
+watch(
+  () => props.isOpen,
+  (newVal) => {
+    if (!newVal) searchQuery.value = "";
+  },
+);
 </script>
 
 <style scoped>
@@ -80,7 +113,9 @@ watch(() => props.isOpen, (newVal) => {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
   border-radius: 8px;
 }
 
@@ -128,8 +163,6 @@ watch(() => props.isOpen, (newVal) => {
   object-fit: contain;
   margin-right: 10px;
 }
-
-
 
 .sm-details {
   display: flex;
@@ -192,8 +225,8 @@ watch(() => props.isOpen, (newVal) => {
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .user-avatar-img {
@@ -206,7 +239,7 @@ watch(() => props.isOpen, (newVal) => {
 .user-name {
   color: #fff;
   font-weight: 600;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   font-size: 14px;
 }
 
@@ -218,7 +251,7 @@ watch(() => props.isOpen, (newVal) => {
 .right-link {
   padding: 6px 15px;
   color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   cursor: pointer;
   font-size: 13px;
 }
@@ -233,10 +266,12 @@ watch(() => props.isOpen, (newVal) => {
   margin: 5px 15px;
 }
 
-.fade-slide-enter-active, .fade-slide-leave-active {
+.fade-slide-enter-active,
+.fade-slide-leave-active {
   transition: all 0.2s ease;
 }
-.fade-slide-enter-from, .fade-slide-leave-to {
+.fade-slide-enter-from,
+.fade-slide-leave-to {
   opacity: 0;
   transform: translateY(10px);
 }

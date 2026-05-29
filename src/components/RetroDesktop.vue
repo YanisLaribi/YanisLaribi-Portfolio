@@ -3,10 +3,10 @@
     <!-- Desktop Area -->
     <div class="desktop-area">
       <div class="desktop-icons">
-        <div 
-          v-for="icon in desktopIcons" 
-          :key="icon.id" 
-          class="desktop-icon" 
+        <div
+          v-for="icon in desktopIcons"
+          :key="icon.id"
+          class="desktop-icon"
           @dblclick="openWindow(icon)"
           @click.stop="selectIcon(icon.id)"
           :class="{ selected: selectedIcon === icon.id }"
@@ -15,37 +15,54 @@
           <div v-else class="icon-image">{{ icon.emoji }}</div>
           <div class="icon-label">{{ icon.title }}</div>
         </div>
-        
       </div>
     </div>
 
     <!-- Windows -->
-    <div 
-      v-for="win in windows" 
-      :key="win.id" 
+    <div
+      v-for="win in windows"
+      :key="win.id"
       class="window aero-glass"
       v-show="!win.minimized"
       :class="{ active: activeWindow === win.id, maximized: win.maximized }"
       :style="windowStyle(win)"
       @mousedown="focusWindow(win.id)"
     >
-      <div class="window-titlebar" @mousedown="startDrag($event, win)" @dblclick="toggleMaximize(win)">
+      <div
+        class="window-titlebar"
+        @mousedown="startDrag($event, win)"
+        @dblclick="toggleMaximize(win)"
+      >
         <div class="titlebar-icon">
           <img v-if="win.iconUrl" :src="win.iconUrl" class="titlebar-img" />
           <span v-else>{{ win.emoji }}</span>
         </div>
         <div class="titlebar-text">{{ win.title }}</div>
         <div class="titlebar-controls">
-          <button class="win-btn minimize" @click.stop="minimizeWindow(win)"></button>
-          <button class="win-btn maximize" @click.stop="toggleMaximize(win)"></button>
-          <button class="win-btn close" @click.stop="closeWindow(win.id)"></button>
+          <button
+            class="win-btn minimize"
+            @click.stop="minimizeWindow(win)"
+          ></button>
+          <button
+            class="win-btn maximize"
+            @click.stop="toggleMaximize(win)"
+          ></button>
+          <button
+            class="win-btn close"
+            @click.stop="closeWindow(win.id)"
+          ></button>
         </div>
       </div>
       <div class="window-content-area">
-        <FileExplorer 
+        <FileExplorer
           v-if="['projects', 'files-explorer', 'experience'].includes(win.id)"
           :initialFolder="win.id === 'files-explorer' ? 'desktop' : win.id"
-          @show-coming-soon="showAlert('Coming soon!', 'This feature is currently under development. Please check back later.')"
+          @show-coming-soon="
+            showAlert(
+              'Coming soon!',
+              'This feature is currently under development. Please check back later.',
+            )
+          "
           @open-app="openWindow"
           @show-project="showProjectAlert"
         />
@@ -61,19 +78,27 @@
           </template>
         </div>
       </div>
-      <div class="window-resize-handle" @mousedown.prevent.stop="startResize($event, win)"></div>
+      <div
+        class="window-resize-handle"
+        @mousedown.prevent.stop="startResize($event, win)"
+      ></div>
     </div>
 
     <!-- Dialog Box -->
     <DialogBox :dialog="dialog" @close="closeDialog" />
 
     <!-- Start Menu -->
-    <StartMenu 
-      :isOpen="isStartMenuOpen" 
+    <StartMenu
+      :isOpen="isStartMenuOpen"
       :icons="startMenuIcons"
       @open-app="openWindow"
       @show-project="showProjectAlert"
-      @show-coming-soon="showAlert('Coming soon!', 'This feature is currently under development. Please check back later.')"
+      @show-coming-soon="
+        showAlert(
+          'Coming soon!',
+          'This feature is currently under development. Please check back later.',
+        )
+      "
       @shutdown="handleShutdown"
     />
 
@@ -92,28 +117,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import DialogBox from './DialogBox.vue'
-import StartMenu from './StartMenu.vue'
-import Taskbar from './Taskbar.vue'
-import FileExplorer from './FileExplorer.vue'
-import AboutWindow from './windows/AboutWindow.vue'
-import ContactsWindow from './windows/ContactsWindow.vue'
-import NotepadWindow from './windows/NotepadWindow.vue'
-import { desktopIcons, startMenuIcons } from '../config/desktopData'
+import { ref } from "vue";
+import DialogBox from "./DialogBox.vue";
+import StartMenu from "./StartMenu.vue";
+import Taskbar from "./Taskbar.vue";
+import FileExplorer from "./FileExplorer.vue";
+import AboutWindow from "./windows/AboutWindow.vue";
+import ContactsWindow from "./windows/ContactsWindow.vue";
+import NotepadWindow from "./windows/NotepadWindow.vue";
+import { desktopIcons, startMenuIcons } from "../config/desktopData";
 
-import { useClock } from '../composables/useClock'
-import { useDialog } from '../composables/useDialog'
-import { useWindowManager } from '../composables/useWindowManager'
-import { useDragResize } from '../composables/useDragResize'
+import { useClock } from "../composables/useClock";
+import { useDialog } from "../composables/useDialog";
+import { useWindowManager } from "../composables/useWindowManager";
+import { useDragResize } from "../composables/useDragResize";
 
-const emit = defineEmits(['exit-computer'])
+const emit = defineEmits(["exit-computer"]);
 
-const isStartMenuOpen = ref(false)
-const selectedIcon = ref(null)
+const isStartMenuOpen = ref(false);
+const selectedIcon = ref(null);
 
-const { time, date } = useClock()
-const { dialog, showConfirm, showAlert, closeDialog } = useDialog()
+const { time, date } = useClock();
+const { dialog, showConfirm, showAlert, closeDialog } = useDialog();
 const {
   windows,
   activeWindow,
@@ -125,52 +150,56 @@ const {
   toggleTaskbarWindow,
   minimizeAllWindows,
   showProjectAlert: baseShowProjectAlert,
-  windowStyle
+  windowStyle,
 } = useWindowManager((folder) => {
-  isStartMenuOpen.value = false
-  showAlert(folder, 'Coming soon!', 'This feature is currently under development. Please check back later.')
-})
+  isStartMenuOpen.value = false;
+  showAlert(
+    folder,
+    "Coming soon!",
+    "This feature is currently under development. Please check back later.",
+  );
+});
 
-const { startDrag, startResize } = useDragResize(focusWindow)
+const { startDrag, startResize } = useDragResize(focusWindow);
 
 function selectIcon(id) {
-  selectedIcon.value = id
-  isStartMenuOpen.value = false
+  selectedIcon.value = id;
+  isStartMenuOpen.value = false;
 }
 
 function openWindow(icon) {
-  isStartMenuOpen.value = false
-  baseOpenWindow(icon)
+  isStartMenuOpen.value = false;
+  baseOpenWindow(icon);
 }
 
 function showProjectAlert(project) {
-  isStartMenuOpen.value = false
-  baseShowProjectAlert(project)
+  isStartMenuOpen.value = false;
+  baseShowProjectAlert(project);
 }
 
 function toggleStartMenu() {
-  isStartMenuOpen.value = !isStartMenuOpen.value
+  isStartMenuOpen.value = !isStartMenuOpen.value;
 }
 
 function closeStartMenu() {
-  isStartMenuOpen.value = false
-  selectedIcon.value = null
+  isStartMenuOpen.value = false;
+  selectedIcon.value = null;
 }
 
 function handleShutdown() {
-  isStartMenuOpen.value = false
+  isStartMenuOpen.value = false;
   showConfirm(
-    'Shut down',
-    'Warning: This will shut down the computer.',
-    'Are you sure you want to proceed? Any unsaved work will be lost.',
+    "Shut down",
+    "Warning: This will shut down the computer.",
+    "Are you sure you want to proceed? Any unsaved work will be lost.",
     () => {
       showAlert(
-        'System Message',
-        'Just kidding',
-        'It does absolutely nothing but I respect the courage.'
-      )
-    }
-  )
+        "System Message",
+        "Just kidding",
+        "It does absolutely nothing but I respect the courage.",
+      );
+    },
+  );
 }
 </script>
 
@@ -178,7 +207,7 @@ function handleShutdown() {
 .win7-os {
   position: absolute;
   inset: 0;
-  background: url('/images/windows7_wallpaper.jpg') no-repeat center center;
+  background: url("/images/windows7_wallpaper.jpg") no-repeat center center;
   background-size: cover;
   background-color: #166fb9;
   font-family: "Segoe UI", Tahoma, sans-serif;
@@ -191,7 +220,9 @@ function handleShutdown() {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
   border-radius: 8px;
 }
 
@@ -236,12 +267,14 @@ function handleShutdown() {
 .icon-image {
   font-size: 32px;
   margin-bottom: 5px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .icon-label {
   color: white;
-  text-shadow: 0 1px 2px black, 0 1px 4px black;
+  text-shadow:
+    0 1px 2px black,
+    0 1px 4px black;
   font-size: 12px;
   text-align: center;
   word-wrap: break-word;
@@ -277,7 +310,7 @@ function handleShutdown() {
   flex: 1;
   font-weight: 600;
   color: #111;
-  text-shadow: 0 0 5px rgba(255,255,255,0.8);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
   font-size: 13px;
 }
 
@@ -289,16 +322,16 @@ function handleShutdown() {
 .win-btn {
   width: 26px;
   height: 20px;
-  border: 1px solid rgba(0,0,0,0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-  background: rgba(255,255,255,0.5);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
   position: relative;
   cursor: pointer;
 }
 
 .win-btn:hover {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .win-btn.close:hover {
@@ -307,7 +340,7 @@ function handleShutdown() {
 }
 
 .win-btn.minimize::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 4px;
   left: 7px;
@@ -317,7 +350,7 @@ function handleShutdown() {
 }
 
 .win-btn.maximize::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 4px;
   left: 6px;
@@ -326,8 +359,9 @@ function handleShutdown() {
   border: 2px solid black;
 }
 
-.win-btn.close::after, .win-btn.close::before {
-  content: '';
+.win-btn.close::after,
+.win-btn.close::before {
+  content: "";
   position: absolute;
   top: 9px;
   left: 6px;
@@ -337,9 +371,16 @@ function handleShutdown() {
   transform-origin: center;
 }
 
-.win-btn.close::after { transform: rotate(45deg); }
-.win-btn.close::before { transform: rotate(-45deg); }
-.win-btn.close:hover::after, .win-btn.close:hover::before { background: white; }
+.win-btn.close::after {
+  transform: rotate(45deg);
+}
+.win-btn.close::before {
+  transform: rotate(-45deg);
+}
+.win-btn.close:hover::after,
+.win-btn.close:hover::before {
+  background: white;
+}
 
 .window-content-area {
   flex: 1;
@@ -388,7 +429,7 @@ function handleShutdown() {
   height: 40px;
   object-fit: contain;
   margin-bottom: 5px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .titlebar-img {

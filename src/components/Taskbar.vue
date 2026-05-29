@@ -1,13 +1,17 @@
 <template>
   <div class="taskbar aero-glass">
-    <div class="start-button" :class="{ active: isStartMenuOpen }" @click.stop="$emit('toggle-start-menu')">
+    <div
+      class="start-button"
+      :class="{ active: isStartMenuOpen }"
+      @click.stop="$emit('toggle-start-menu')"
+    >
       <div class="win-logo"></div>
     </div>
-    
+
     <div class="taskbar-items">
-      <div 
-        v-for="win in windows" 
-        :key="'tb-'+win.id"
+      <div
+        v-for="win in windows"
+        :key="'tb-' + win.id"
         class="taskbar-item"
         :class="{ active: activeWindow === win.id && !win.minimized }"
         @click="$emit('toggle-taskbar-window', win)"
@@ -19,8 +23,18 @@
     </div>
 
     <div class="system-tray">
-      <div class="tray-icon" title="I mean this website is clearly running... so I guess we do have wifi yes">📶</div>
-      <div class="tray-icon battery-icon" title="Don't worry, this portfolio is fueled with redbull and coffee!">🔋</div>
+      <div
+        class="tray-icon"
+        title="I mean this website is clearly running... so I guess we do have wifi yes"
+      >
+        📶
+      </div>
+      <div
+        class="tray-icon battery-icon"
+        title="Don't worry, this portfolio is fueled with redbull and coffee!"
+      >
+        🔋
+      </div>
       <div class="tray-time">
         <div>{{ time }}</div>
         <div>{{ date }}</div>
@@ -36,9 +50,9 @@ defineProps({
   activeWindow: String,
   isStartMenuOpen: Boolean,
   time: String,
-  date: String
-})
-defineEmits(['toggle-start-menu', 'toggle-taskbar-window', 'minimize-all'])
+  date: String,
+});
+defineEmits(["toggle-start-menu", "toggle-taskbar-window", "minimize-all"]);
 </script>
 
 <style scoped>
@@ -47,7 +61,9 @@ defineEmits(['toggle-start-menu', 'toggle-taskbar-window', 'minimize-all'])
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .taskbar {
@@ -75,15 +91,21 @@ defineEmits(['toggle-start-menu', 'toggle-taskbar-window', 'minimize-all'])
   cursor: pointer;
 }
 
-.start-button:hover, .start-button.active {
-  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+.start-button:hover,
+.start-button.active {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
 }
 
 .win-logo {
   width: 36px;
   height: 36px;
-  background: url('/images/windows 7 logo launcher.png') center/contain no-repeat;
-  filter: drop-shadow(0 0 2px rgba(255,255,255,0.4));
+  background: url("/images/windows 7 logo launcher.png") center/contain
+    no-repeat;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
 }
 
 .taskbar-items {
@@ -117,7 +139,7 @@ defineEmits(['toggle-start-menu', 'toggle-taskbar-window', 'minimize-all'])
 .taskbar-item.active {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.6);
-  box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .taskbar-img {

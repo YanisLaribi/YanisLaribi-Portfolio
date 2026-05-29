@@ -4,26 +4,57 @@
       <img src="/images/icons/user.svg" class="about-avatar" />
       <div class="about-title">
         <h2>Yanis Laribi</h2>
-        <p class="about-subtitle">Software Engineering Student • Université Laval</p>
+        <p class="about-subtitle">
+          Software Engineering Student • Université Laval
+        </p>
       </div>
     </div>
     <div class="about-body">
-      <p class="about-paragraph first-letter">I grew up in Algeria and came to Canada when I was six. One bedroom for three people, no table to eat at, and a country where the language was a mystery to my eyes. But my father had kept his laptop from Algeria, and that changed everything. Every free moment I had, I was in front of that screen. I didn't know it then, but that's where my obsession with technology quietly took root.</p>
+      <p class="about-paragraph first-letter">
+        I grew up in Algeria and came to Canada when I was six. One bedroom for
+        three people, no table to eat at, and a country where the language was a
+        mystery to my eyes. But my father had kept his laptop from Algeria, and
+        that changed everything. Every free moment I had, I was in front of that
+        screen. I didn't know it then, but that's where my obsession with
+        technology quietly took root.
+      </p>
 
-      <p class="about-paragraph">Little after, in high school, a teacher introduced me to Scratch. The moment I moved that cartoon cat across the screen, something clicked. I remember thinking: <em>That I was limitless, and I could do anything (yes at 12 years old a simple cartoon cat made me feel that)</em> <span class="about-sidenote">(Data structures, algorithms, statistics and probabilities were still somewhere over the horizon... they'd show up soon enough.)</span></p>
+      <p class="about-paragraph">
+        Little after, in high school, a teacher introduced me to Scratch. The
+        moment I moved that cartoon cat across the screen, something clicked. I
+        remember thinking:
+        <em
+          >That I was limitless, and I could do anything (yes at 12 years old a
+          simple cartoon cat made me feel that)</em
+        >
+        <span class="about-sidenote"
+          >(Data structures, algorithms, statistics and probabilities were still
+          somewhere over the horizon... they'd show up soon enough.)</span
+        >
+      </p>
 
-      <p class="about-paragraph">That conviction never left me. When it came time to choose a path, Software Engineering was the only natural answer. Since then, I've been pushing myself forward with an unlimited curiosity and a perseverance that was forged long before university...</p>
+      <p class="about-paragraph">
+        That conviction never left me. When it came time to choose a path,
+        Software Engineering was the only natural answer. Since then, I've been
+        pushing myself forward with an unlimited curiosity and a perseverance
+        that was forged long before university...
+      </p>
 
-      <p class="about-paragraph">Outside of code, I lift weights, play sports, and travel whenever I can. The gym keeps me sane. Travelling keeps me humble. And sports remind me that losing is fine, as long as you show up again the next day. Which, honestly, applies to programming too.</p>
+      <p class="about-paragraph">
+        Outside of code, I lift weights, play sports, and travel whenever I can.
+        The gym keeps me sane. Travelling keeps me humble. And sports remind me
+        that losing is fine, as long as you show up again the next day. Which,
+        honestly, applies to programming too.
+      </p>
 
-      <p class="about-paragraph">Anyway, I hope you know me a little better now. Feel free to reach out!.</p>
-
+      <p class="about-paragraph">
+        Anyway, I hope you know me a little better now. Feel free to reach out!.
+      </p>
     </div>
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 /* About App Styles */
@@ -42,16 +73,24 @@
   padding: 20px;
   background: linear-gradient(to bottom, #ffffff, #e1eaf5);
   border-bottom: 1px solid #99b4d1;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
 }
 
 .about-header::after {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
   pointer-events: none;
 }
 
@@ -61,7 +100,7 @@
   margin-right: 20px;
   background: transparent;
   object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 
 .about-title h2 {
